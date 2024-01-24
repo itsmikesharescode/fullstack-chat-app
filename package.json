@@ -37,11 +37,15 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/ssr": "^0.0.10",
+		"@supabase/supabase-js": "^2.39.3",
 		"bits-ui": "^0.15.1",
 		"clsx": "^2.1.0",
 		"lucide-svelte": "^0.314.0",
 		"mode-watcher": "^0.1.2",
+		"svelte-sonner": "^0.3.11",
 		"tailwind-merge": "^2.2.1",
-		"tailwind-variants": "^0.1.20"
+		"tailwind-variants": "^0.1.20",
+		"zod": "^3.22.4"
 	}
 }
