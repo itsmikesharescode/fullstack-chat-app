@@ -3,7 +3,8 @@
     import { ModeWatcher } from "mode-watcher";
     import "../app.pcss";
     import { Toaster } from "$lib/components/ui/sonner";
-    
+	import type { LayoutData } from "./$types";
+
 </script>
 
 <ModeWatcher />

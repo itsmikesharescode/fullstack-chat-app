@@ -3,7 +3,7 @@
     import { Input } from "$lib/components/ui/input";
     import { Label } from "$lib/components/ui/label";
     import { Separator } from "$lib/components/ui/separator";
-    import {goto, invalidate, invalidateAll} from "$app/navigation";
+    import {goto, invalidateAll} from "$app/navigation";
 	import { scale } from "svelte/transition";
 	import BtnWraper from "$lib/mycomp/BtnWraper.svelte";
 	import { enhance } from "$app/forms";
@@ -94,4 +94,5 @@
         </div>
 
     </form> 
+    
 </div>

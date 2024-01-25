@@ -15,3 +15,11 @@ export const registerSchema = z.object({
 export const forgotPasswordSchema = z.object({
     email: z.string().email({message: "Must enter a valid email."}),
 });
+
+
+export const resetPassSchema = z.object({
+
+    new_password: z.string().min(8, {message: "New password must be at least 8 char long."}),
+    
+    confirm_new_password: z.string().min(1, {message: "Must confirm your new password."}),
+})

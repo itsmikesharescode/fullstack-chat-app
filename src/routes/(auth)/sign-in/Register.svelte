@@ -3,7 +3,7 @@
     import { Input } from "$lib/components/ui/input";
     import { Label } from "$lib/components/ui/label";
     import { Separator } from "$lib/components/ui/separator";
-    import {goto} from "$app/navigation";
+    import {goto, invalidateAll} from "$app/navigation";
 	import { scale } from "svelte/transition";
 	import { enhance } from "$app/forms";
 	import type { SubmitFunction } from "@sveltejs/kit";
@@ -41,6 +41,7 @@
                     $navState.session = session;
                     toast.success("Register succes", {description: msg});
                     registerLoader = false;
+                    invalidateAll();
                     break;
                 
                 case 402:

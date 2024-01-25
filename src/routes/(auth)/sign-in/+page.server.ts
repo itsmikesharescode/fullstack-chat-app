@@ -1,6 +1,15 @@
-import { fail, type Actions } from "@sveltejs/kit";
+import { fail, type Actions, redirect } from "@sveltejs/kit";
 import type { ZodError } from "zod";
-import { loginSchema, registerSchema } from "$lib/validation-schemas/loginSchemas";
+import { loginSchema, registerSchema, forgotPasswordSchema } from "$lib/validation-schemas/loginSchemas";
+import type { PageServerLoad } from "./$types";
+
+export const load: PageServerLoad = async ({locals: {supabase, getSession}}) => {
+    
+    const session = await getSession();
+
+    if(session) throw redirect(302, "/has-auth");
+
+};
 
 export const actions: Actions = {
     
@@ -42,14 +51,25 @@ export const actions: Actions = {
                     options: {
                         data: {
                             display_name: result.display_name,
-                        }
-                    }
+                        },
+                    },
                 });
 
                 if(registerError) return fail(402, {msg: registerError.message});
                 else if (session) {
-                    // database connection here!
-                }
+
+                    const { error: insertError } = await supabase.from("user_list").insert([{
+
+                        user_id: session.user.id,
+                        display_name: session.user.user_metadata.display_name,
+                        email: session.user.email,
+
+                    }]);
+
+                    if(insertError) return fail(402, {msg: insertError.message});
+                    else return fail(200, {msg: "Registered successfully.", session});
+
+                };
 
 
             }else return fail(402, {msg: "Passwords do not match."})
@@ -58,7 +78,35 @@ export const actions: Actions = {
             const zodError = error as ZodError;
             const {fieldErrors} = zodError.flatten();
             return fail(403, {errors: fieldErrors});
-        }
+        };
+    },
+
+    forgot: async ({request, locals: {supabase}}) => 
+    {
+        const formData = Object.fromEntries(await request.formData());
+
+        try {
+            const result = forgotPasswordSchema.parse(formData);
+
+            const { error: resetPassError } = await supabase.auth.resetPasswordForEmail(result.email);
+
+            if(resetPassError) return fail(402, {msg: resetPassError.message});
+            else return fail(200, {msg: `An email containing a password reset has been sent to your email ${result.email}`});
+
+        } catch (error) {
+            const zodError = error as ZodError;
+            const {fieldErrors} = zodError.flatten();
+
+            return fail(403, {errors: fieldErrors});
+        };
+    },
+
+    logout: async ({locals: {supabase}}) => 
+    {
+        const {error: logoutError} = await supabase.auth.signOut();
+
+        if(logoutError) return fail(402, {msg: logoutError.message});
+        else return fail(200, {msg: "Logged out successfully."});
     }
 
 }; 
