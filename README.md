@@ -1,5 +1,5 @@
 ## Fullstack ChatApp 
-live website: https://vercel.com/mike-johns-projects/fullstack-chat-app
+live website: https://mike-chat-app.vercel.app/
 
 
 ## Technology used in the project
