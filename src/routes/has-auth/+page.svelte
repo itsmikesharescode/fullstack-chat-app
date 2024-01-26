@@ -47,8 +47,6 @@
         async (payload) => {
             msgCount++
             await getChats();
-            console.log("AW")
-            
         }
     )
     .subscribe();
@@ -98,7 +96,9 @@
                                 </div>
                             </div>
 
-                            <Options {chats} />
+                            {#if $navState.session?.user.email == chats.user_email}
+                                <Options chats={chats} />
+                            {/if}
                             
                             
                         </div>

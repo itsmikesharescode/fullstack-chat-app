@@ -6,6 +6,7 @@
 	import type { SubmitFunction } from "@sveltejs/kit";
     import BtnWraper from "$lib/mycomp/BtnWraper.svelte";
 	import { toast } from "svelte-sonner";
+	import Update from "./Update.svelte";
 	
     export let chats: Message_List;
 
@@ -55,9 +56,7 @@
             </Button>
         </form>
 
-        
-        <Button class="w-full">Update</Button>
-        
+        <Button on:click={() => alert("Lazy but the concept the same just delete it haha")} >Update</Button>
        
     </DropdownMenu.Content>
 
