@@ -7,3 +7,5 @@ export const navState = writable({
 })
 
 export const chatsArray = writable<Message_List[] | null>(null);
+
+export const notif = writable<string[] | null>(null);

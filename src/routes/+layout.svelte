@@ -8,7 +8,7 @@
 </script>
 
 <ModeWatcher />
-<Toaster richColors={true} />
+<Toaster richColors={true} position="top-right" />
 
 <div class="min-h-screen p-2">
     <slot/>

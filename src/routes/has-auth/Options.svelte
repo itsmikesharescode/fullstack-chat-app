@@ -7,7 +7,7 @@
 
 <DropdownMenu.Root>
     <DropdownMenu.Trigger asChild let:builder>
-        <Button variant="ghost" builders={[builder]}>* * *</Button>
+        <Button variant="ghost" builders={[builder]} class="z-10">* * *</Button>
     </DropdownMenu.Trigger>
 
     <DropdownMenu.Content class="flex flex-col gap-2">
