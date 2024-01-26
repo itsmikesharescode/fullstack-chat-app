@@ -47,6 +47,7 @@
         async (payload) => {
             msgCount++
             await getChats();
+            console.log("AW")
             
         }
     )
@@ -84,7 +85,6 @@
             <div class="h-[70dvh] py-5 overflow-auto flex flex-col-reverse gap-2" on:scroll={handleScroll} bind:this={elementScrollValue}>
                 {#each $chatsArray ?? [] as chats }
                     <div class="flex flex-col">
-
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
                                 <Avatar.Root>
@@ -98,8 +98,7 @@
                                 </div>
                             </div>
 
-                        
-                            <Options />
+                            <Options {chats} />
                             
                             
                         </div>

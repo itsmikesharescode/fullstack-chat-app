@@ -45,5 +45,18 @@ export const actions: Actions = {
             return fail(403, {errors: fieldErrors});
             
         }
+    },
+
+    deleteChat: async ({request, locals: {supabase}}) => 
+    {
+        const formData = await request.formData();
+
+        const chat_id = formData.get("chat_id") as string;
+        console.log(chat_id)
+        const { error: deleteChatError } = await supabase.from("message_list").delete().match({id: chat_id});
+
+        if(deleteChatError) return fail(402, {msg: deleteChatError.message});
+        else return fail(200, {msg: "Message deleted successfully."});
+
     }
 };
