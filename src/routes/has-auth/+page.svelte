@@ -21,7 +21,7 @@
 
     const getChats = async () => 
     {
-        const qChats = "id, created_at, user_email, user_display_name, user_message";
+        const qChats = "id, created_at, user_email, user_display_name, user_message, is_updated";
 
         const {data:allChats, error:allChatsError} = await data.supabase.from("message_list").select(qChats).order("created_at", {ascending: false});
 
@@ -86,7 +86,7 @@
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
                                 <Avatar.Root>
-                                    <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+                                    <Avatar.Image src="https://i.pinimg.com/236x/f8/86/53/f886538d352ab338162dee243651ed0c.jpg" alt="@mikeyIcon" />
                                     <Avatar.Fallback>CN</Avatar.Fallback>
                                 </Avatar.Root>
                                 
@@ -94,10 +94,18 @@
                                     <p class="font-bold">{chats.user_display_name}</p>
                                     <small class="text-sm font-medium leading-none opacity-50">{dateConvert(chats.created_at)}</small>
                                 </div>
+                                
+                                {#if chats.is_updated}
+                                    <div class="">
+                                        <small class="opacity-50 sm:ml-5">Edited</small>
+                                    </div>
+                                {/if}
                             </div>
 
                             {#if $navState.session?.user.email == chats.user_email}
-                                <Options chats={chats} />
+                                <div class="sm:mr-5">
+                                    <Options chats={chats} />
+                                </div>
                             {/if}
                             
                             
@@ -115,8 +123,6 @@
             
             <div class="absolute left-0 right-0 flex justify-center" in:scale>
              
-                <!-- <button class="p-2 rounded-lg backdrop-lg bg-[#5933c250]">{displayNewMsg} New Message</button> -->
-              
                 {#if showArrowDown}
                     {#if msgCount}
                         <button class="p-2 rounded-lg backdrop-lg bg-green-500 dark:bg-green-700 text-white font-bold flex items-center transition-all animate-bounce hover:animate-none" on:click={() => {

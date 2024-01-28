@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
-	import { invalidateAll } from "$app/navigation";
 	import Button from "$lib/components/ui/button/button.svelte";
 	import Textarea from "$lib/components/ui/textarea/textarea.svelte";
 	import BtnWraper from "$lib/mycomp/BtnWraper.svelte";

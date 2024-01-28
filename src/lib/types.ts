@@ -12,4 +12,5 @@ export type Message_List = {
     user_email: string
     user_display_name: string
     user_message: string
+    is_updated: boolean
 }
