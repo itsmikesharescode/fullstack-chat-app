@@ -99,7 +99,7 @@
     
         <Card.Content>
             <div class="h-[70dvh] py-5 overflow-auto flex flex-col gap-2" on:scroll={handleScroll} bind:this={$scrollVal}>
-                {#each $chatsArray ?? [] as chats }
+                {#each $chatsArray ?? [] as chats, index }
                     <div class="flex flex-col break-words" in:fly={{x:100, duration: 400, easing: bounceInOut}}>
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-2">
