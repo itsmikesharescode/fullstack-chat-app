@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
+	import { scrollVal } from "$lib";
 	import Button from "$lib/components/ui/button/button.svelte";
 	import Textarea from "$lib/components/ui/textarea/textarea.svelte";
 	import BtnWraper from "$lib/mycomp/BtnWraper.svelte";
 	import type { ServerNews } from "$lib/types";
 	import type { SubmitFunction } from "@sveltejs/kit";
+	import { tick } from "svelte";
 	import { toast } from "svelte-sonner";
+
 
     type SendChatVal = {
         send_chat: string[]
